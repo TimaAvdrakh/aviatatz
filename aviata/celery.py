@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from celery import Celery
+from celery.schedules import crontab
 from datetime import datetime, timedelta
 
 import os
@@ -12,9 +13,9 @@ app = Celery('aviata')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.conf.beat_schedule = {
-    'add-every-5-seconds': {
-        'task': 'tz.tasks.check_flights',
-        'schedule': 1.0,
+    'task-10-sec`': {
+        'task': 'tz.tasks.send_email',
+        'schedule': 10,
         # 'args': ('hpatel@aaravtech.com','This is sample message.')
     }
 }
