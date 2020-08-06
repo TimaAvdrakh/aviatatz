@@ -6,7 +6,16 @@ from django.core.cache import cache
 import requests
 
 directions = [
-    
+    "ALA-TSE"
+    "TSE-ALA"
+    "ALA-MOW"
+    "MOW-ALA"
+    "ALA-CIT"
+    "CIT-ALA"
+    "TSE-MOW"
+    "MOW-TSE"
+    "TSE-LED"
+    "LED-TSE"
 ]
 
 @shared_task

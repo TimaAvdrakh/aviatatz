@@ -5,8 +5,14 @@
 git clone https://github.com/TimaAvdrakh/aviatatz
 
 
-### installing requirements
+### Installing requirements
 pip3 install -req.txt
 
 ### Enabling RabbitMQ
 sudo systemctl enable rabbitmq-server
+
+### Celery worker info
+celery -A aviata worker -l info
+
+### Celery beat
+celery -A aviata beat -l info
