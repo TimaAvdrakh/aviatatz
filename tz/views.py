@@ -1,6 +1,4 @@
 
-from django.shortcuts import render
-from django.http import JsonResponse
 from django.core.cache import cache
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -22,8 +20,12 @@ directions = [
 
 
 class CheapestTicketView(APIView):
+    """View для нажождения самого дешевого билета в кэше"""
 
     def get(self, request):
+        """
+        params : date, fly_from , fly_to
+        """
         date = request.query_params.get('date')
         fly_from = request.query_params.get('fly_from')
         fly_to = request.query_params.get('fly_to')
@@ -46,8 +48,7 @@ class CheapestTicketView(APIView):
 
 
 class AllCachedKeys(APIView):
+    """ Для просмтра всех ключей в КЭШ """
     def get(self, request):
-
         return Response({'data': cache.keys('*')}, status=status.HTTP_200_OK)
 
-        # return Response({"message":"NO CASH"}, status=status.HTTP_404_NOT_FOUND)

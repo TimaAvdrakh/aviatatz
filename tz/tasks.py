@@ -1,6 +1,5 @@
 from __future__ import absolute_import, unicode_literals
 from celery import shared_task
-import time
 from datetime import timedelta, date, datetime
 from django.core.cache import cache
 import requests
@@ -22,32 +21,25 @@ directions = [
     "TSE-LED",
     "LED-TSE"
 ]
-#
-# @shared_task
-# def sum(a, b):
-#     time.sleep(10)
-#     return a+b
+
 
 @shared_task
 def get_cheap_tickets():
+    """Таск для кэширования всех направлений в directions"""
     for direction in directions:
         destinations = direction.split('-')
-
         today = date.today()
         date_from = today.strftime(FORMAT)
-
         end = today + timedelta(days=30)
         date_to = end.strftime(FORMAT)
-
         fly_from = destinations[0]
         fly_to = destinations[1]
-        # print("searching for direction {} {}".format(fry_from, fly_to))
         search_single_directions(fly_from, fly_to, date_from, date_to)
         search_single_directions(fly_to, fly_from, date_from, date_to)
 
 
 def search_single_directions(fly_from, fly_to, date_from, date_to):
-
+    """Функиия кэширует отдельные напровления в формате {date}_{fly_from}_{fly_to} """
     params = {'fly_from': fly_from,
               'fly_to': fly_to,
               'date_from': date_from,
@@ -65,7 +57,6 @@ def search_single_directions(fly_from, fly_to, date_from, date_to):
         current_date = datetime.utcfromtimestamp(ticket.get('dTimeUTC')).strftime(FORMAT)
         price = ticket.get('price')
         key = "{}_{}_{}".format(current_date, fly_from, fly_to)
-        print("caching key {} ".format(key))
 
         if check_ticket(booking_token) == 0:
 
@@ -73,7 +64,9 @@ def search_single_directions(fly_from, fly_to, date_from, date_to):
             cache.set(key, data, 86400)
             break
 
+
 def check_ticket(booking_token):
+    """ Функция проверяет билеты по токену брони(booking_token)"""
     response = None
     checked = False
 
