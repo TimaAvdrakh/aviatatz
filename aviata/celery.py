@@ -13,11 +13,12 @@ app = Celery('aviata')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.conf.beat_schedule = {
-    'task-10-sec`': {
-        'task': 'tz.tasks.send_email',
-        'schedule': 10,
+    'task-every-day-midnight`': {
+        'task': 'tz.tasks.get_cheap_tickets',
+        # 'schedule': crontab(minute=0, hour=0),
+        'schedule': 10.0,
         # 'args': ('hpatel@aaravtech.com','This is sample message.')
-    }
+    },
 }
 
 app.conf.timezone = 'UTC'

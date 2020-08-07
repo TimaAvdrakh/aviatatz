@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'tz',
 
     'django_celery_results',
-    'django_celery_beat'
+    'django_celery_beat',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "example"
+    }
+}
