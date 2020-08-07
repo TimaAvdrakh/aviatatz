@@ -16,8 +16,7 @@ app.conf.beat_schedule = {
     'task-every-day-midnight`': {
         'task': 'tz.tasks.get_cheap_tickets',
         # 'schedule': crontab(minute=0, hour=0),
-        'schedule': 10.0,
-        # 'args': ('hpatel@aaravtech.com','This is sample message.')
+        'schedule': 100000000.0,
     },
 }
 

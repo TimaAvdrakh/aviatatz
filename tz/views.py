@@ -34,7 +34,7 @@ class CheapestTicketView(APIView):
         if "{}-{}".format(fly_from.upper(), fly_to.upper()) not in directions:
             return Response({'message': 'This directions not found'}, status=status.HTTP_400_BAD_REQUEST)
 
-        key = "{}_{}_{}".format(date, fly_from, fly_to)
+        key = "{}_{}_{}".format(date, fly_from.upper(), fly_to.upper())
 
         ticket = cache.get(key)
 

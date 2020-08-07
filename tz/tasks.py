@@ -41,7 +41,7 @@ def get_cheap_tickets():
 
         fly_from = destinations[0]
         fly_to = destinations[1]
-        print("searching for direction {} {}".format(fry_from,fly_to))
+        # print("searching for direction {} {}".format(fry_from, fly_to))
         search_single_directions(fly_from, fly_to, date_from, date_to)
         search_single_directions(fly_to, fly_from, date_from, date_to)
 
