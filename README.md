@@ -1,10 +1,3 @@
-# aviatatz
-Тестовое задание в компанию Aviata/Chocotravel на позицию jun3
-
-# Download
-git clone https://github.com/TimaAvdrakh/aviatatz
-
-
 ### Installing requirements
 pip3 install -req.txt
 
